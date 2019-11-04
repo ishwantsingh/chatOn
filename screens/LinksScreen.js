@@ -1,8 +1,12 @@
 import React from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet, Text } from "react-native";
 
 export default function LinksScreen() {
-  return <ScrollView style={styles.container}>Links</ScrollView>;
+  return (
+    <ScrollView style={styles.container}>
+      <Text>Links</Text>
+    </ScrollView>
+  );
 }
 
 LinksScreen.navigationOptions = {
