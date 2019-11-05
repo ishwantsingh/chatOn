@@ -299,6 +299,8 @@
 
 import React from "react";
 import { GiftedChat } from "react-native-gifted-chat";
+import { ScrollView, StyleSheet, Text, View, Platform } from "react-native";
+import KeyboardSpacer from "react-native-keyboard-spacer";
 
 export default class HomeScreen extends React.Component {
   state = {
@@ -330,13 +332,16 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <GiftedChat
-        messages={this.state.messages}
-        onSend={messages => this.onSend(messages)}
-        user={{
-          _id: 1
-        }}
-      />
+      <View style={styles.container}>
+        <GiftedChat
+          messages={this.state.messages}
+          onSend={messages => this.onSend(messages)}
+          user={{
+            _id: 1
+          }}
+        />
+        {Platform.OS === "android" ? <KeyboardSpacer topSpacing={30} /> : null}
+      </View>
     );
   }
 }
@@ -344,3 +349,13 @@ export default class HomeScreen extends React.Component {
 HomeScreen.navigationOptions = {
   title: "Home"
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff"
+  },
+  contentContainer: {
+    paddingTop: 30
+  }
+});
