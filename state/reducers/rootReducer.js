@@ -1,11 +1,11 @@
-// import { combineReducers } from "redux";
+import { combineReducers } from "redux";
 
-// import reducers from "./reducers";
-// import setDataReducer from "./setDataReducer";
+import newMessageReducer from "./newMessageReducer";
+//import setDataReducer from "./setDataReducer";
 
-// const rootReducer = combineReducers({
-//   reducers: reducers,
-//   dishes: setDataReducer
-// });
+const rootReducer = combineReducers({
+  newMessageReducer: newMessageReducer
+  //   dishes: setDataReducer
+});
 
-// export default rootReducer;
+export default rootReducer;

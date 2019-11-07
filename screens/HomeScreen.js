@@ -41,7 +41,7 @@ export default class HomeScreen extends React.Component {
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
           user={{
-            _id: 1
+            _id: 2
           }}
         />
         {Platform.OS === "android" ? <KeyboardSpacer topSpacing={30} /> : null}
