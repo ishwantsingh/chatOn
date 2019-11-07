@@ -2,12 +2,18 @@ import React from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 import { ScrollView, StyleSheet, Text, View, Platform } from "react-native";
 import KeyboardSpacer from "react-native-keyboard-spacer";
+import { connect } from "react-redux";
 
 import dummyMessages from "../state/dummyData";
+import newMessageAction from "../state/actions/newMessageAction";
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
   state = {
-    messages: []
+    messages: [],
+    user: {
+      _id: 1,
+      name: "Developer"
+    }
   };
 
   componentWillMount() {
@@ -28,10 +34,13 @@ export default class HomeScreen extends React.Component {
     });
   }
 
-  onSend(messages = []) {
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages)
-    }));
+  // onSend(messages = []) {
+  //   this.setState(previousState => ({
+  //     messages: GiftedChat.append(previousState.messages, messages)
+  //   }));
+  // }
+  onSend(text) {
+    this.props.newMessageAction(text, this.state.user);
   }
 
   render() {
@@ -39,9 +48,9 @@ export default class HomeScreen extends React.Component {
       <View style={styles.container}>
         <GiftedChat
           messages={this.state.messages}
-          onSend={messages => this.onSend(messages)}
+          onSend={newMessage => this.onSend(newMessage)}
           user={{
-            _id: 2
+            _id: 1
           }}
         />
         {Platform.OS === "android" ? <KeyboardSpacer topSpacing={30} /> : null}
@@ -50,9 +59,20 @@ export default class HomeScreen extends React.Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    newMessageAction: (text, user) => dispatch(newMessageAction(text, user))
+  };
+};
+
 HomeScreen.navigationOptions = {
   title: "Home"
 };
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {

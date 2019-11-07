@@ -1,3 +1,5 @@
+import uuid from "uuid";
+
 // const getInfo = (cal, carb, fat, fiber, mineral, protein) => {
 //   return {
 //     type: "GET_INFO",
@@ -13,17 +15,14 @@
 // };
 // export default getInfo;
 
-export function newMessage(id, text, userId, userName) {
+export default function newMessageAction(text, user) {
   return {
     type: "NEW_MESSAGE",
     payload: {
-      _id: id,
+      _id: uuid(),
       text: text,
       createdAt: new Date(),
-      user: {
-        _id: userId,
-        name: userName
-      },
+      user: user,
       sent: false,
       recieved: false
     }

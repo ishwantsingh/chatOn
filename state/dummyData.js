@@ -1,6 +1,6 @@
 export default [
   {
-    _id: 7,
+    _id: 1,
     text: "#awesome",
     createdAt: new Date(),
     user: {
@@ -9,7 +9,7 @@ export default [
     }
   },
   {
-    _id: 6,
+    _id: 2,
     text: "Paris",
     createdAt: new Date(),
     user: {
@@ -22,7 +22,7 @@ export default [
     received: true
   },
   {
-    _id: 5,
+    _id: 3,
     text: "Send me a picture!",
     createdAt: new Date(),
     user: {
@@ -46,7 +46,7 @@ export default [
     // },
   },
   {
-    _id: 3,
+    _id: 5,
     text: "Where are you?",
     createdAt: new Date(),
     user: {
@@ -55,7 +55,7 @@ export default [
     }
   },
   {
-    _id: 2,
+    _id: 6,
     text: "Yes, and I use #GiftedChat!",
     createdAt: new Date(),
     user: {
@@ -66,7 +66,7 @@ export default [
     received: true
   },
   {
-    _id: 1,
+    _id: 7,
     text: "Are you building a chat app?",
     createdAt: new Date(),
     user: {
@@ -75,7 +75,7 @@ export default [
     }
   },
   {
-    _id: 10,
+    _id: 8,
     text: "This is a quick reply. Do you love Gifted Chat? (radio) KEEP IT",
     createdAt: new Date(),
     quickReplies: {
@@ -102,7 +102,7 @@ export default [
     }
   },
   {
-    _id: 20,
+    _id: 9,
     text: "This is a quick reply. Do you love Gifted Chat? (checkbox)",
     createdAt: new Date(),
     quickReplies: {
@@ -128,7 +128,7 @@ export default [
     }
   },
   {
-    _id: 30,
+    _id: 10,
     createdAt: new Date(),
     video: "https://media.giphy.com/media/3o6ZthZjk09Xx4ktZ6/giphy.mp4",
     user: {
