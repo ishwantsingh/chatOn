@@ -3,6 +3,8 @@ import { GiftedChat } from "react-native-gifted-chat";
 import { ScrollView, StyleSheet, Text, View, Platform } from "react-native";
 import KeyboardSpacer from "react-native-keyboard-spacer";
 
+import dummyMessages from "../state/dummyData";
+
 export default class HomeScreen extends React.Component {
   state = {
     messages: []
@@ -10,18 +12,19 @@ export default class HomeScreen extends React.Component {
 
   componentWillMount() {
     this.setState({
-      messages: [
-        {
-          _id: 1,
-          text: "Hello developer",
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: "React Native",
-            avatar: "https://placeimg.com/140/140/any"
-          }
-        }
-      ]
+      // messages: [
+      //   {
+      //     _id: 1,
+      //     text: "Hello developer",
+      //     createdAt: new Date(),
+      //     user: {
+      //       _id: 2,
+      //       name: "React Native",
+      //       avatar: "https://placeimg.com/140/140/any"
+      //     }
+      //   }
+      // ]
+      messages: dummyMessages
     });
   }
 
