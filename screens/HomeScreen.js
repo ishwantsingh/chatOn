@@ -4,52 +4,90 @@ import { ScrollView, StyleSheet, Text, View, Platform } from "react-native";
 import KeyboardSpacer from "react-native-keyboard-spacer";
 import { connect } from "react-redux";
 
-import dummyMessages from "../state/dummyData";
+//import dummyMessages from "../state/dummyData";
 import newMessageAction from "../state/actions/newMessageAction";
 
 class HomeScreen extends React.Component {
   state = {
-    messages: [],
+    messages: this.props.messages,
+    newMessage: {},
     user: {
       _id: 1,
       name: "Developer"
     }
   };
 
-  componentWillMount() {
-    this.setState({
-      // messages: [
-      //   {
-      //     _id: 1,
-      //     text: "Hello developer",
-      //     createdAt: new Date(),
-      //     user: {
-      //       _id: 2,
-      //       name: "React Native",
-      //       avatar: "https://placeimg.com/140/140/any"
-      //     }
-      //   }
-      // ]
-      messages: dummyMessages
-    });
+  // componentWillMount() {
+  //   this.setState({
+  //     messages: this.props.messages
+  //   });
+  // }
+
+  componentDidUpdate() {
+    // this.setState(previousState => ({
+    //   info: GiftedChat.append(previousState.messages, info)
+    // }));
+    // this.setState({
+    //   messages: this.props.messages
+    // });
+    // this.setState((previousState, props) => ({
+    //   messages: GiftedChat.append(previousState.messages, props.messages)
+    // }));
+    console.log(this.state);
+    this.props.newMessageAction(this.state.newMessage[0].text, this.state.user);
   }
 
-  // onSend(messages = []) {
-  //   this.setState(previousState => ({
-  //     messages: GiftedChat.append(previousState.messages, messages)
-  //   }));
+  // shouldComponentUpdate() {
+  //   // this.setState(previousState => ({
+  //   //   info: GiftedChat.append(previousState.messages, info)
+  //   // }));
+  //   this.setState({
+  //     messages: this.props.messages
+  //   });
   // }
-  onSend(info) {
-    console.log("info text is=>", info[0].text);
-    this.props.newMessageAction(info[0].text, this.state.user);
+
+  updateScreen = (messages = []) => {
+    this.setState(previousState => ({
+      messages: GiftedChat.append(previousState.messages, messages)
+    }));
+  };
+
+  // updateScreen = (messages = []) => {
+  //   this.setState((prevState, props) => ({
+  //     messages: GiftedChat.append(prevState.messages, messages)
+  //   }));
+  //   console.log("ok", GiftedChat);
+  // };
+
+  // updateReducer = messages => {
+  //   console.log(messages);
+  //   this.props.newMessageAction(messages[0].text, this.state.user);
+  // };
+
+  onSend(messages) {
+    console.log("gifted => ", GiftedChat);
+    // this.setState(previousState => ({
+    //   messages: GiftedChat.append(previousState.messages, messages)
+    // }));
+    // this.updateReducer(messages);
+    this.setState({
+      newMessage: messages
+    });
+    this.updateScreen(messages);
+
+    // this.props.newMessageAction(messages[0].text, this.state.user);
   }
+  // onSend(info) {
+  //   console.log("info text is=>", info[0].text);
+  //   this.props.newMessageAction(info[0].text, this.state.user);
+  // }
 
   render() {
     return (
       <View style={styles.container}>
         <GiftedChat
           messages={this.state.messages}
-          onSend={info => this.onSend(info)}
+          onSend={messages => this.onSend(messages)}
           user={{
             _id: 1
           }}
@@ -66,12 +104,19 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => {
+  // console.log("state=>", state.newMessageReducer);
+  return {
+    messages: state.newMessageReducer
+  };
+};
+
 HomeScreen.navigationOptions = {
   title: "Home"
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(HomeScreen);
 
