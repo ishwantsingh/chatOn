@@ -39,8 +39,9 @@ class HomeScreen extends React.Component {
   //     messages: GiftedChat.append(previousState.messages, messages)
   //   }));
   // }
-  onSend(text) {
-    this.props.newMessageAction(text, this.state.user);
+  onSend(info) {
+    console.log("info text is=>", info[0].text);
+    this.props.newMessageAction(info[0].text, this.state.user);
   }
 
   render() {
@@ -48,7 +49,7 @@ class HomeScreen extends React.Component {
       <View style={styles.container}>
         <GiftedChat
           messages={this.state.messages}
-          onSend={newMessage => this.onSend(newMessage)}
+          onSend={info => this.onSend(info)}
           user={{
             _id: 1
           }}
