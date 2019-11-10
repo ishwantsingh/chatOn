@@ -35,7 +35,7 @@ export const login = () => {
         }
         // The signed-in user info.
         var user = result.user;
-        dispatch({ type: "AUTH_SUCCESS", payload: { token, user } });
+        dispatch({ type: "AUTH_SUCCESS", payload: { user, token } });
       })
       .catch(function(error) {
         // Handle Errors here.
@@ -46,7 +46,10 @@ export const login = () => {
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
         // ...
-        dispatch({ type: "AUTH_FAIL", payload: { errorCode, errorMessage } });
+        dispatch({
+          type: "AUTH_FAIL",
+          payload: { err: `${errorCode}: ${errorMessage}` }
+        });
       });
   };
 };
