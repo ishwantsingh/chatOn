@@ -1,10 +1,14 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet, Text, Button } from "react-native";
 
-export default function LinksScreen() {
+import { login } from "../state/actions/authAction";
+import { connect } from "react-redux";
+
+function LinksScreen(props) {
   return (
     <ScrollView style={styles.container}>
-      <Text>Links</Text>
+      <Text>Log In Please</Text>
+      <Button onPress={props.login} title="Login" />
     </ScrollView>
   );
 }
@@ -12,6 +16,17 @@ export default function LinksScreen() {
 LinksScreen.navigationOptions = {
   title: "Links"
 };
+
+const mapDispatchToProps = dispatch => {
+  return {
+    login: () => dispatch(login())
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(LinksScreen);
 
 const styles = StyleSheet.create({
   container: {
