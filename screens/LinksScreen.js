@@ -18,6 +18,7 @@ LinksScreen.navigationOptions = {
 };
 
 const mapDispatchToProps = dispatch => {
+  //123
   return {
     login: () => dispatch(login())
   };
