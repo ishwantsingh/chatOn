@@ -6,74 +6,84 @@ import { connect } from "react-redux";
 
 import newMessageAction from "../state/actions/newMessageAction";
 
+let user = {
+  _id: 1,
+  name: "Developer"
+};
+
+let user1 = {
+  _id: 1,
+  name: "Developer"
+};
+
+let user2 = {
+  _id: 2,
+  name: "React Native"
+};
+
 class HomeScreen extends React.Component {
-  state = {
-    messages: this.props.messages,
-    newMessage: {},
-    user: {
-      _id: 1,
-      name: "Developer"
-    },
-    // user1: {
-    //   _id: 1,
-    //   name: "Developer"
-    // },
-    user2: {
-      _id: 2,
-      name: "React Native"
-    }
-    //    senderId: 1
-  };
+  // state = {
+  //   messages: this.props.messages,
+  //   newMessage: {},
+  //   user: {},
+  //   user1: {
+  //     _id: 1,
+  //     name: "Developer"
+  //   },
+  //   user2: {
+  //     _id: 2,
+  //     name: "React Native"
+  //   }
+  // };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: this.props.messages,
+      newMessage: {},
+      user: {},
+      user1: {
+        _id: 1,
+        name: "Developer"
+      },
+      user2: {
+        _id: 2,
+        name: "React Native"
+      }
+    };
+  }
 
   componentDidUpdate() {
-    // console.log(this.state.user2);
-    // console.log(this.state.user);
-    // if (this.state.user == this.state.user1) {
-    //   this.setState({
-    //     user: this.state.user2
-    //   });
-    // } else {
-    //   // this.props.newMessageAction(
-    //   //   this.state.newMessage[0].text,
-    //   //   this.state.user
-    //   // );
-    //   this.setState({
-    //     user: this.state.user1
-    //   });
+    // if (this.props.messages.length % 2 == 0) {
+    //   console.log("even length", this.props.messages.length);
+    //   user = user1;
+    // } else if (this.props.messages.length % 2 !== 0) {
+    //   console.log("odd length", this.props.messages.length);
+    //   user = user2;
     // }
-    // console.log("4");
-    // JSON.stringify(obj1) === JSON.stringify(obj2)
-    if (
-      JSON.stringify(this.props.messages[0].user) ===
-      JSON.stringify(this.state.user)
-    ) {
-      console.log("works1");
-      this.props.newMessageAction(this.state.newMessage, this.state.user2);
-    } else if (
-      JSON.stringify(this.props.messages[0].user) ===
-      JSON.stringify(this.state.user2)
-    ) {
-      console.log("works2");
 
-      this.props.newMessageAction(this.state.newMessage, this.state.user);
+    if (this.props.messages.length % 2 == 0) {
+      console.log("evenLength =>", this.props.messages.length);
+      user = user1;
+      this.props.newMessageAction(this.state.newMessage, this.state.user1);
+      console.log("boo00001");
+    } else if (this.props.messages.length % 2 !== 0) {
+      console.log("oddLength =>", this.props.messages.length);
+      user = user2;
+      this.props.newMessageAction(this.state.newMessage, this.state.user2);
+      console.log("boo00002");
     }
+    // this.setState({ messages: this.props.messages });
     //  this.props.newMessageAction(this.state.newMessage, this.state.user);
   }
 
-  // componentWillUpdate() {
-  //   if (this.state.user == this.state.user1) {
-  //     this.setState({
-  //       user: this.state.user2
-  //     });
-  //   } else {
-  //     this.setState({
-  //       user: this.state.user1
-  //     });
-  //   }
-  // }
+  componentWillReceiveProps() {
+    console.log("KKKKKKKKKKKK");
+    this.setState({ messages: this.props.messages });
+  }
 
   updateScreen = (messages = []) => {
-    console.log("3");
+    //console.log("3");
     // if (this.state.user === this.state.user1) {
     //   this.setState({
     //     user: this.state.user2
@@ -83,39 +93,34 @@ class HomeScreen extends React.Component {
     //     user: this.state.user1
     //   });
     // }
+    if (this.props.messages.length % 2 == 0) {
+      console.log("messages.user", messages[0].user);
+      messages[0].user = this.state.user1;
+    } else if (this.props.messages.length % 2 !== 0) {
+      messages[0].user = this.state.user2;
+    }
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages)
     }));
   };
 
   onSend(messages) {
-    // if (this.state.user === this.state.user1) {
-    //   this.setState({
-    //     user: this.state.user2
-    //   });
-    // } else {
-    //   this.setState({
-    //     user: this.state.user1
-    //   });
-    // }
-    console.log("2");
+    //  console.log("messages 1", messages);
+    //  console.log("2");
     this.setState({
       newMessage: messages[0].text
     });
     this.updateScreen(messages);
   }
-
   render() {
-    // if (this.state.user === this.state.user1) {
-    //   this.setState({
-    //     user: this.state.user2
-    //   });
-    // } else {
-    //   this.setState({
-    //     user: this.state.user1
-    //   });
-    // }
-    console.log("user1", this.props.messages[0].user);
+    // this.setUser();
+    if (this.props.messages == []) {
+      user = user1;
+    }
+    //  console.log("THE USER IS", user);
+    console.log("props", this.props.messages);
+
+    console.log("state", this.state.messages);
     return (
       <View style={styles.container}>
         <GiftedChat
@@ -124,7 +129,7 @@ class HomeScreen extends React.Component {
           // user={{
           //  _id: this.state.senderId
           // }}
-          user={this.props.messages[1].user}
+          user={user1}
         />
         {Platform.OS === "android" ? <KeyboardSpacer topSpacing={30} /> : null}
       </View>
