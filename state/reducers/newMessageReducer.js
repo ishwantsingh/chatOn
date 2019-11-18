@@ -5,9 +5,7 @@ import dummyMessages from "../dummyData";
 export default function messageReducer(state = dummyMessages, action) {
   switch (action.type) {
     case "NEW_MESSAGE":
-      // console.log("action_payload=>", action.payload);
-      state.unshift(action.payload);
-      return state;
+      return [action.payload, ...state];
     // return {
     //   ...state,
     //   text: action.payload.text,
