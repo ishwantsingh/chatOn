@@ -1,4 +1,4 @@
-import { myFirebase } from "../../fb/config";
+import { myFirebase, db } from "../../fb/config";
 // import firebase from "firebase";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
@@ -131,4 +131,28 @@ export const verifyAuth = () => dispatch => {
     console.log("okie dokie");
     dispatch(verifySuccess());
   });
+};
+
+export const signup = (email, password, firstName, lastName) => dispatch => {
+  myFirebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(resp => {
+      console.log("SIGNUP_SUCCESS", resp);
+      return db
+        .collection("users")
+        .doc(resp.user.uid)
+        .set({
+          firstName: firstName,
+          lastName: lastName,
+          initials: firstName[0] + lastName[0]
+        });
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log("SIGNUP_ERROR", errorMessage);
+      // ...
+    });
 };
