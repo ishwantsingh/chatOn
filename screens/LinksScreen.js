@@ -1,112 +1,109 @@
 import React from "react";
-import { ScrollView, StyleSheet, Text, Button } from "react-native";
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  Button
+} from "react-native";
 
 import { login } from "../state/actions/authAction";
 import { connect } from "react-redux";
 
-function LinksScreen(props) {
-  return (
-    <ScrollView style={styles.container}>
-      <Text>Log In Please</Text>
-      <Button onPress={props.login} title="Login" />
-    </ScrollView>
-  );
-}
-
-// class Login extends Component {
-//   state = { email: "", password: "" };
-
-//   handleEmailChange = ({ target }) => {
-//     this.setState({ email: target.value });
-//   };
-
-//   handlePasswordChange = ({ target }) => {
-//     this.setState({ password: target.value });
-//   };
-
-//   handleSubmit = () => {
-//     const { dispatch } = this.props;
-//     const { email, password } = this.state;
-
-//     dispatch(loginUser(email, password));
-//   };
-
-//   render() {
-//     const { classes, loginError, isAuthenticated } = this.props;
-//     if (isAuthenticated) {
-//       return <Redirect to="/" />;
-//     } else {
-//       return (
-//         <Container component="main" maxWidth="xs">
-//           <Paper className={classes.paper}>
-//             <Avatar className={classes.avatar}>
-//               <LockOutlinedIcon />
-//             </Avatar>
-//             <Typography component="h1" variant="h5">
-//               Sign in
-//             </Typography>
-//             <TextField
-//               variant="outlined"
-//               margin="normal"
-//               fullWidth
-//               id="email"
-//               label="Email Address"
-//               name="email"
-//               onChange={this.handleEmailChange}
-//             />
-//             <TextField
-//               variant="outlined"
-//               margin="normal"
-//               fullWidth
-//               name="password"
-//               label="Password"
-//               type="password"
-//               id="password"
-//               onChange={this.handlePasswordChange}
-//             />
-//             {loginError && (
-//               <Typography component="p" className={classes.errorText}>
-//                 Incorrect email or password.
-//               </Typography>
-//             )}
-//             <Button
-//               type="button"
-//               fullWidth
-//               variant="contained"
-//               color="primary"
-//               className={classes.submit}
-//               onClick={this.handleSubmit}
-//             >
-//               Sign In
-//             </Button>
-//           </Paper>
-//         </Container>
-//       );
-//     }
-//   }
+// function LinksScreen(props) {
+//   return (
+//     <ScrollView style={styles.container}>
+//       <Text>Log In Please</Text>
+//       <Button onPress={props.login} title="Login" />
+//     </ScrollView>
+//   );
 // }
 
-// function mapStateToProps(state) {
-//   return {
-//     isLoggingIn: state.auth.isLoggingIn,
-//     loginError: state.auth.loginError,
-//     isAuthenticated: state.auth.isAuthenticated
-//   };
+function LinksScreen(props) {
+  const [email, handleEmailChange] = React.useState("");
+  const [password, handlePasswordChange] = React.useState("");
+
+  // state = { email: "", password: "" };
+
+  // handleEmailChange = text => {
+  //   console.log("text is=>", text);
+  //   this.setState({ email: text });
+  // };
+
+  // handlePasswordChange = text => {
+  //   this.setState({ password: text });
+  // };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    // const { dispatch } = this.props;
+    //  const { email, password } = this.state;
+    console.log("email is=>", email);
+    console.log("pass is=>", password);
+    props.login(email, password);
+  };
+
+  // render() {
+  const { loginError, isAuthenticated } = props;
+  // if (isAuthenticated) {
+  //   return <Redirect to="/" />;
+  // } else {
+  return (
+    // <Container component="main" maxWidth="xs">
+    <View>
+      <View>
+        {/* <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar> */}
+        <Text>Sign in</Text>
+        <TextInput
+          textContentType="emailAddress"
+          placeholder="Email Address"
+          //   name="email"
+          value={email}
+          onChangeText={text => handleEmailChange(text)}
+        />
+        <TextInput
+          //   name="password"
+          placeholder="Password"
+          textContentType="password"
+          // id="password"
+          value={password}
+          onChangeText={text => handlePasswordChange(text)}
+        />
+        {loginError && (
+          <Text className={styles.errorText}>Incorrect email or password.</Text>
+        )}
+        <Button onPress={this.handleSubmit} title="Sign In" />
+      </View>
+    </View>
+  );
+  // }
+}
 // }
 
 LinksScreen.navigationOptions = {
   title: "Links"
 };
 
+function mapStateToProps(state) {
+  return {
+    isLoggingIn: state.authInfo.isLoggingIn,
+    loginError: state.authInfo.loginError,
+    isAuthenticated: state.authInfo.isAuthenticated
+  };
+}
+
 const mapDispatchToProps = dispatch => {
   //123
   return {
-    login: () => dispatch(login())
+    login: (email, password) => dispatch(login(email, password))
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(LinksScreen);
 
@@ -115,5 +112,13 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 15,
     backgroundColor: "#fff"
+  },
+  form: {
+    marginTop: 1
+  },
+  errorText: {
+    color: "#f50057",
+    marginBottom: 5,
+    textAlign: "center"
   }
 });
