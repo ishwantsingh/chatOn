@@ -1,8 +1,11 @@
 import React from "react";
 import { Provider } from "react-redux";
 
-import store from "./state/store";
+//import configureStore from ""
+import configureStore from "./state/store";
 import AppContainer from "./AppContainer";
+
+const store = configureStore();
 
 export default class App extends React.Component {
   render() {
