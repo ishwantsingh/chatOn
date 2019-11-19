@@ -4,6 +4,9 @@ import { myFirebase, db } from "../../fb/config";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_FAIL = "AUTH_FAIL";
 
+export const SIGNUP_SUCCESS = "SIGNUP_SUCCESS";
+export const SIGNUP_ERROR = "SIGNUP_ERROR";
+
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
@@ -66,8 +69,21 @@ const verifySuccess = () => {
 
 const authSuccess = user => {
   return {
-    type: "AUTH_SUCCESS",
+    type: AUTH_SUCCESS,
     payload: { user }
+  };
+};
+
+const signupSuccess = user => {
+  return {
+    type: SIGNUP_SUCCESS,
+    payload: { user }
+  };
+};
+const signupError = error => {
+  return {
+    type: SIGNUP_ERROR,
+    payload: { error }
   };
 };
 
@@ -149,6 +165,7 @@ export const signup = (email, password, firstName, lastName) => dispatch => {
     .createUserWithEmailAndPassword(email, password)
     .then(resp => {
       console.log("SIGNUP_SUCCESS", resp);
+      dispatch(signupSuccess(resp));
       return db
         .collection("users")
         .doc(resp.user.uid)
@@ -160,8 +177,11 @@ export const signup = (email, password, firstName, lastName) => dispatch => {
     })
     .catch(function(error) {
       // Handle Errors here.
+
       var errorCode = error.code;
       var errorMessage = error.message;
+      dispatch(signupError(errorMessage));
+
       console.log("SIGNUP_ERROR", errorMessage);
       // ...
     });
