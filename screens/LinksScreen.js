@@ -8,7 +8,7 @@ import {
   Button
 } from "react-native";
 
-import { login } from "../state/actions/authAction";
+import { login, logout } from "../state/actions/authAction";
 import { connect } from "react-redux";
 
 function LinksScreen(props) {
@@ -45,6 +45,9 @@ function LinksScreen(props) {
         )}
         <Button onPress={this.handleSubmit} title="Sign In" />
       </View>
+      <View style={styles.buttonContainer}>
+        <Button onPress={props.logout} title="Sign Out" />
+      </View>
     </View>
   );
 }
@@ -63,7 +66,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    login: (email, password) => dispatch(login(email, password))
+    login: (email, password) => dispatch(login(email, password)),
+    logout: () => dispatch(logout())
   };
 };
 
@@ -75,8 +79,10 @@ export default connect(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
-    backgroundColor: "#fff"
+    paddingTop: 15
+  },
+  buttonContainer: {
+    marginTop: 10
   },
   form: {
     marginTop: 1

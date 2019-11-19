@@ -1,6 +1,9 @@
 import { myFirebase, db } from "../../fb/config";
 // import firebase from "firebase";
 
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_FAIL = "AUTH_FAIL";
+
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
@@ -61,13 +64,20 @@ const verifySuccess = () => {
   };
 };
 
+const authSuccess = user => {
+  return {
+    type: "AUTH_SUCCESS",
+    payload: { user }
+  };
+};
+
 export const login = (email, password) => dispatch => {
   dispatch(requestLogin());
   myFirebase
     .auth()
     .signInWithEmailAndPassword(email, password)
     .then(user => {
-      dispatch({ type: "AUTH_SUCCESS", payload: { token, user } });
+      dispatch(authSuccess(user));
       dispatch(receiveLogin(user));
     })
     .catch(error => {

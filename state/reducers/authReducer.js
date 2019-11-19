@@ -1,4 +1,6 @@
 import {
+  AUTH_SUCCESS,
+  AUTH_FAIL,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
@@ -12,8 +14,6 @@ import {
 const initialState = {
   authError: null,
   authCompleted: false,
-  // user: [],
-  token: "",
   isLoggingIn: false,
   isLoggingOut: false,
   isVerifying: false,
@@ -25,15 +25,14 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "AUTH_SUCCESS":
+    case AUTH_SUCCESS:
       return {
         ...state,
         authCompleted: true,
         authError: null,
-        user: action.payload.user,
-        token: action.payload.token
+        user: action.payload.user
       };
-    case "AUTH_FAIL":
+    case AUTH_FAIL:
       return { ...state, authError: action.payload, authCompleted: false };
     case LOGIN_REQUEST:
       return {
@@ -66,6 +65,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isLoggingOut: false,
         isAuthenticated: false,
+        authCompleted: false,
         user: {}
       };
     case LOGOUT_FAILURE:
