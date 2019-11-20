@@ -166,6 +166,7 @@ export const verifyAuth = () => dispatch => {
   myFirebase.auth().onAuthStateChanged(user => {
     if (user !== null) {
       console.log("auth change user", user);
+      dispatch(setData());
       dispatch(receiveLogin(user));
     }
     console.log("okie dokie");

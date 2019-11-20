@@ -30,13 +30,12 @@ export function sendMessgae(text, userDetails, senderId, recieverId) {
     console.log("sooka blooka");
     dispatch(sendingMessage());
     console.log("baangu baangu");
-    var doc_id = `${senderId}+${recieverId}`;
+    var doc_id = `${senderId}` + `${recieverId}`;
 
     db.collection("chatRooms")
       .doc(doc_id)
       .collection("messages")
-      .doc()
-      .set({
+      .add({
         text: text,
         createdAt: new Date(),
         user: userDetails,

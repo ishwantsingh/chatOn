@@ -5,6 +5,7 @@ import KeyboardSpacer from "react-native-keyboard-spacer";
 import { connect } from "react-redux";
 
 import newMessageAction from "../state/actions/newMessageAction";
+import { sendMessgae } from "../state/actions/newMessageAction";
 
 const user1 = {
   _id: 1,
@@ -20,9 +21,21 @@ class HomeScreen extends React.Component {
   onSend(messages) {
     if (this.props.messages.length % 2 == 0) {
       this.props.newMessageAction(messages[0].text, user1);
+      this.props.sendMessgae(
+        messages[0].text,
+        user1,
+        this.props.userId,
+        this.props.userId
+      );
       console.log("boo00001");
     } else if (this.props.messages.length % 2 !== 0) {
       this.props.newMessageAction(messages[0].text, user2);
+      this.props.sendMessgae(
+        messages[0].text,
+        user2,
+        this.props.userId,
+        this.props.userId
+      );
       console.log("boo00002");
     }
     console.log("yo the messages are:", messages);
@@ -43,14 +56,19 @@ class HomeScreen extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    newMessageAction: (text, user) => dispatch(newMessageAction(text, user))
+    newMessageAction: (text, user) => dispatch(newMessageAction(text, user)),
+    sendMessgae: (text, userDetails, senderId, recieverId) =>
+      dispatch(sendMessgae(text, userDetails, senderId, recieverId))
+    //senderId and RecieverId sent into the thunk is of same user as using this for self chat.
   };
 };
 
 const mapStateToProps = state => {
   // console.log(state, "state");
+  console.log("uid=>", state.authInfo.user.uid);
   return {
-    messages: state.newMessageReducer
+    messages: state.newMessageReducer,
+    userId: state.authInfo.user.uid
   };
 };
 

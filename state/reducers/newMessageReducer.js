@@ -5,15 +5,15 @@ import {
   SENDING_NEW_MES
 } from "../actions/newMessageAction";
 
-dummyMessages = [];
+let dummyMessages = [];
 
-// const initialState = {
-//   docId: "",
-//   sendErr: null,
-//   sendingMessage: false
-// };
+const initialState = {
+  docId: "",
+  sendErr: null,
+  sendingMessage: false
+};
 
-export default function messageReducer(state = initialState, action) {
+export default function messageReducer(state = dummyMessages, action) {
   switch (action.type) {
     case "NEW_MESSAGE":
       return [action.payload, ...state];
@@ -32,15 +32,15 @@ export default function messageReducer(state = initialState, action) {
   }
 }
 
-// export default function sendMessageReducer(state = initialState, action) {
-//   switch (action.type) {
-//     case NEW_MES_SENT:
-//         return {...state, docId: action.payload.docId, sendingMessage: false};
-//     case NEW_MES_ERR:
-//         return {...state, sendErr: action.payload, sendingMessage: false};
-//     case SENDING_NEW_MES:
-//         return {...state, sendingMessage: true};
-//     default:
-//       return state;
-//   }
-// }
+export function sendMessageReducer(state = initialState, action) {
+  switch (action.type) {
+    case NEW_MES_SENT:
+      return { ...state, docId: action.payload.docId, sendingMessage: false };
+    case NEW_MES_ERR:
+      return { ...state, sendErr: action.payload, sendingMessage: false };
+    case SENDING_NEW_MES:
+      return { ...state, sendingMessage: true };
+    default:
+      return state;
+  }
+}
