@@ -80,7 +80,8 @@ const authReducer = (state = initialState, action) => {
         isLoggingOut: false,
         isAuthenticated: false,
         authCompleted: false,
-        user: {}
+        user: {},
+        newUser: {}
       };
     case LOGOUT_FAILURE:
       return {

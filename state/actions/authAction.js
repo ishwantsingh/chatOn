@@ -74,6 +74,13 @@ const authSuccess = user => {
   };
 };
 
+const authFail = error => {
+  return {
+    type: AUTH_FAIL,
+    payload: { error }
+  };
+};
+
 const signupSuccess = user => {
   return {
     type: SIGNUP_SUCCESS,
@@ -99,6 +106,7 @@ export const login = (email, password) => dispatch => {
     .catch(error => {
       //Do something with the error if you want!
       console.log("error", error);
+      dispatch(authFail(error));
       dispatch(loginError());
     });
   //   .then(() => {
