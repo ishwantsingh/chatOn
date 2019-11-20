@@ -19,8 +19,8 @@ const user2 = {
 
 class HomeScreen extends React.Component {
   onSend(messages) {
-    if (this.props.messages.length % 2 == 0) {
-      this.props.newMessageAction(messages[0].text, user1);
+    if (this.props.messagesData.length % 2 == 0) {
+      //  this.props.newMessageAction(messages[0].text, user1);
       this.props.sendMessgae(
         messages[0].text,
         user1,
@@ -28,8 +28,8 @@ class HomeScreen extends React.Component {
         this.props.userId
       );
       console.log("boo00001");
-    } else if (this.props.messages.length % 2 !== 0) {
-      this.props.newMessageAction(messages[0].text, user2);
+    } else if (this.props.messagesData.length % 2 !== 0) {
+      // this.props.newMessageAction(messages[0].text, user2);
       this.props.sendMessgae(
         messages[0].text,
         user2,
@@ -48,7 +48,7 @@ class HomeScreen extends React.Component {
           onSend={messages => this.onSend(messages)}
           user={user1}
         />
-        {Platform.OS === "android" ? <KeyboardSpacer topSpacing={30} /> : null}
+        {Platform.OS === "android" ? <KeyboardSpacer topSpacing={20} /> : null}
       </View>
     );
   }
@@ -64,15 +64,13 @@ const mapDispatchToProps = dispatch => {
 };
 
 const mapStateToProps = state => {
-  // console.log(state, "state");
-  console.log("uid=>", state.authInfo.user.uid);
-  if (state.data.data.data) {
-    console.log("messageData=>", state.data.data.data);
-  }
   return {
     messages: state.newMessageReducer,
     userId: state.authInfo.user.uid,
     messagesData: state.data.data.data ? state.data.data.data : []
+    // lastMessageUserId: state.data.data.data
+    //   ? state.data.data.data[0].user._id
+    //   : ""
   };
 };
 
