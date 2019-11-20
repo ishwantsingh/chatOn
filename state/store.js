@@ -3,8 +3,8 @@ import thunkMiddleware from "redux-thunk";
 
 import rootReducer from "./reducers/rootReducer";
 import { verifyAuth } from "./actions/authAction";
-import devToolsEnhancer from "remote-redux-devtools";
-
+//import devToolsEnhancer from "remote-redux-devtools";
+//import { composeWithDevTools } from 'remote-redux-devtools';
 //export default store = createStore(rootReducer, devToolsEnhancer());
 
 export default function configureStore(persistedState) {
@@ -13,7 +13,8 @@ export default function configureStore(persistedState) {
     persistedState,
     compose(
       applyMiddleware(thunkMiddleware),
-      devToolsEnhancer()
+      window.__REDUX_DEVTOOLS_EXTENSION__ &&
+        window.__REDUX_DEVTOOLS_EXTENSION__()
     )
   );
   store.dispatch(verifyAuth());

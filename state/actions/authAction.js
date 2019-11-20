@@ -1,4 +1,5 @@
 import { myFirebase, db } from "../../fb/config";
+import { setData } from "./setDataAction";
 // import firebase from "firebase";
 
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
@@ -102,6 +103,11 @@ export const login = (email, password) => dispatch => {
     .then(user => {
       dispatch(authSuccess(user));
       dispatch(receiveLogin(user));
+    })
+    .then(() => {
+      console.log("lub lub");
+      dispatch(setData());
+      console.log("hub hub hub");
     })
     .catch(error => {
       //Do something with the error if you want!
