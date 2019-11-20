@@ -54,16 +54,16 @@ export function sendMessgae(text, userDetails, senderId, recieverId) {
   };
 }
 
-export default function newMessageAction(text, user) {
-  return {
-    type: "NEW_MESSAGE",
-    payload: {
-      _id: uuid(),
-      text: text,
-      createdAt: new Date(),
-      user: user,
-      sent: false,
-      recieved: false
-    }
-  };
-}
+// export default function newMessageAction(text, user) {
+//   return {
+//     type: "NEW_MESSAGE",
+//     payload: {
+//       _id: uuid(),
+//       text: text,
+//       createdAt: new Date(),
+//       user: user,
+//       sent: false,
+//       recieved: false
+//     }
+//   };
+// }

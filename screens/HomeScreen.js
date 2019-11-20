@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, Text, View, Platform } from "react-native";
 import KeyboardSpacer from "react-native-keyboard-spacer";
 import { connect } from "react-redux";
 
-import newMessageAction from "../state/actions/newMessageAction";
+//import newMessageAction from "../state/actions/newMessageAction";
 import { sendMessgae } from "../state/actions/newMessageAction";
 
 const user1 = {
@@ -65,7 +65,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    messages: state.newMessageReducer,
+    //  messages: state.newMessageReducer,
     userId: state.authInfo.user.uid,
     messagesData: state.data.data.data ? state.data.data.data : []
     // lastMessageUserId: state.data.data.data
