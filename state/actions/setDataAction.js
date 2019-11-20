@@ -23,16 +23,17 @@ const gettingData = () => {
   };
 };
 
-export function setData() {
+export function setData(senderId, recieverId) {
   console.log("check?");
   return dispatch => {
     console.log("wubba lubba dub dub");
     dispatch(gettingData());
     let setDataPromise = new Promise((resolve, reject) => {
       console.log("tooola tooola");
+      var doc_id = `${senderId}` + `${recieverId}`;
       const snapshot = db
         .collection("chatRooms")
-        .doc("chatRoom_1")
+        .doc(doc_id)
         .collection("messages")
         .get();
 

@@ -104,9 +104,9 @@ export const login = (email, password) => dispatch => {
       dispatch(authSuccess(user));
       dispatch(receiveLogin(user));
     })
-    .then(() => {
+    .then(user => {
       console.log("lub lub");
-      dispatch(setData());
+      dispatch(setData(user.uid, user.uid)); //sender and reciever id same for this app
       console.log("hub hub hub");
     })
     .catch(error => {
@@ -166,7 +166,7 @@ export const verifyAuth = () => dispatch => {
   myFirebase.auth().onAuthStateChanged(user => {
     if (user !== null) {
       console.log("auth change user", user);
-      dispatch(setData());
+      dispatch(setData(user.uid, user.uid));
       dispatch(receiveLogin(user));
     }
     console.log("okie dokie");
