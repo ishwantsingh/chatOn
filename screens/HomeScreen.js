@@ -44,7 +44,7 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container}>
         <GiftedChat
-          messages={this.props.messages}
+          messages={this.props.messagesData}
           onSend={messages => this.onSend(messages)}
           user={user1}
         />
@@ -66,9 +66,13 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   // console.log(state, "state");
   console.log("uid=>", state.authInfo.user.uid);
+  if (state.data.data.data) {
+    console.log("messageData=>", state.data.data.data);
+  }
   return {
     messages: state.newMessageReducer,
-    userId: state.authInfo.user.uid
+    userId: state.authInfo.user.uid,
+    messagesData: state.data.data.data ? state.data.data.data : []
   };
 };
 

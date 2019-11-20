@@ -40,7 +40,8 @@ export function sendMessgae(text, userDetails, senderId, recieverId) {
         createdAt: new Date(),
         user: userDetails,
         senderId: senderId,
-        recieverId: recieverId
+        recieverId: recieverId,
+        _id: uuid()
       })
       .then(docRef => {
         console.log("Document written with ID: ", docRef.id);
