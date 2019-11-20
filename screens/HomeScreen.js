@@ -4,7 +4,6 @@ import { ScrollView, StyleSheet, Text, View, Platform } from "react-native";
 import KeyboardSpacer from "react-native-keyboard-spacer";
 import { connect } from "react-redux";
 
-//import newMessageAction from "../state/actions/newMessageAction";
 import { sendMessgae } from "../state/actions/newMessageAction";
 
 const user1 = {
@@ -20,7 +19,6 @@ const user2 = {
 class HomeScreen extends React.Component {
   onSend(messages) {
     if (this.props.messagesData.length % 2 == 0) {
-      //  this.props.newMessageAction(messages[0].text, user1);
       this.props.sendMessgae(
         messages[0].text,
         user1,
@@ -29,7 +27,6 @@ class HomeScreen extends React.Component {
       );
       console.log("boo00001");
     } else if (this.props.messagesData.length % 2 !== 0) {
-      // this.props.newMessageAction(messages[0].text, user2);
       this.props.sendMessgae(
         messages[0].text,
         user2,
@@ -65,12 +62,8 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
-    //  messages: state.newMessageReducer,
     userId: state.authInfo.user.uid,
     messagesData: state.data.data.data ? state.data.data.data : []
-    // lastMessageUserId: state.data.data.data
-    //   ? state.data.data.data[0].user._id
-    //   : ""
   };
 };
 
