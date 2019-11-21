@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet, Text, View, Platform } from "react-native";
 import KeyboardSpacer from "react-native-keyboard-spacer";
 import { connect } from "react-redux";
 
+//import {Bubble} from "../node_modules/react-native-gifted-chat/lib/Bubble.js";
 import { sendMessgae } from "../state/actions/newMessageAction";
 
 const user1 = {
@@ -37,6 +38,42 @@ class HomeScreen extends React.Component {
     }
     console.log("yo the messages are:", messages);
   }
+  // renderTicks() {
+  //   const { currentMessage, renderTicks, user } = this.props;
+  //   if (renderTicks && currentMessage) {
+  //     return renderTicks(currentMessage);
+  //   }
+  //   if (currentMessage && user && currentMessage.user._id !== user._id) {
+  //     return null;
+  //   }
+  //   if (
+  //     currentMessage &&
+  //     (currentMessage.sent || currentMessage.received || currentMessage.pending)
+  //   ) {
+  //     return (
+  //       <View style={styles.content.tickView}>
+  //         {!!currentMessage.sent && (
+  //           <Text style={[styles.content.tick, this.props.tickStyle]}>✓</Text>
+  //         )}
+  //         {!!currentMessage.received && (
+  //           <Text style={[styles.content.tick, this.props.tickStyle]}>✓</Text>
+  //         )}
+  //         {!!currentMessage.pending && (
+  //           <Text style={[styles.content.tick, this.props.tickStyle]}>🕓</Text>
+  //         )}
+  //       </View>
+  //     );
+  //   }
+  //   return null;
+  // }
+  // renderBubble = props => {
+  //   return (
+  //     <Bubble
+  //       {...props,renderTicks}
+  //     //  {renderTicks}
+  //     />
+  //   )
+  // }
   render() {
     return (
       <View style={styles.container}>
@@ -44,6 +81,7 @@ class HomeScreen extends React.Component {
           messages={this.props.messagesData}
           onSend={messages => this.onSend(messages)}
           user={user1}
+          //    renderBubble={this.renderBubble}
         />
         {Platform.OS === "android" ? <KeyboardSpacer topSpacing={20} /> : null}
       </View>
