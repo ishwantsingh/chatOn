@@ -24,33 +24,22 @@ const gettingData = () => {
 };
 
 export function setData(senderId, recieverId) {
-  //  console.log("check?");
   return dispatch => {
-    //  console.log("wubba lubba dub dub");
     dispatch(gettingData());
     let setDataPromise = new Promise((resolve, reject) => {
-      //  console.log("tooola tooola");
       var doc_id = `${senderId}` + `${recieverId}`;
       const snapshot = db
         .collection("chatRooms")
         .doc(doc_id)
         .collection("messages")
         .orderBy("createdAt", "desc")
-        // .get();
         .onSnapshot(function(querySnapshot) {
           let dataRecieved = querySnapshot.docs.map(doc => doc.data());
           dataRecieved.forEach(doc => {
             doc.createdAt = doc.createdAt.toDate();
-            //  data.push({ _id: doc._id,
-            //  createdAt: date,
-            //  id: doc.id,
-            //  text: doc.text,
-            //  user: doc.user})
-            //  })
           });
           dispatch(getDataSuccess(dataRecieved));
         });
-      //    console.log("snapshot is", snapshot);
       resolve(snapshot);
       reject("some error occured");
     });

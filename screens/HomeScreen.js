@@ -4,7 +4,6 @@ import { ScrollView, StyleSheet, Text, View, Platform } from "react-native";
 import KeyboardSpacer from "react-native-keyboard-spacer";
 import { connect } from "react-redux";
 
-//import {Bubble} from "../node_modules/react-native-gifted-chat/lib/Bubble.js";
 import { sendMessgae } from "../state/actions/newMessageAction";
 
 const user1 = {
@@ -109,10 +108,7 @@ HomeScreen.navigationOptions = {
   title: "Home"
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
 
 const styles = StyleSheet.create({
   container: {
