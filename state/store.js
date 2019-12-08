@@ -3,9 +3,6 @@ import thunkMiddleware from "redux-thunk";
 
 import rootReducer from "./reducers/rootReducer";
 import { verifyAuth } from "./actions/authAction";
-//import devToolsEnhancer from "remote-redux-devtools";
-//import { composeWithDevTools } from 'remote-redux-devtools';
-//export default store = createStore(rootReducer, devToolsEnhancer());
 
 export default function configureStore(persistedState) {
   const store = createStore(

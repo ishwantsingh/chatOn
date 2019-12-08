@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
 
-//import configureStore from ""
 import configureStore from "./state/store";
 import AppContainer from "./AppContainer";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { GiftedChat } from "react-native-gifted-chat";
-import { ScrollView, StyleSheet, Text, View, Platform } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
 import KeyboardSpacer from "react-native-keyboard-spacer";
 import { connect } from "react-redux";
 
