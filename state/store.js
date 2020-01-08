@@ -10,7 +10,7 @@ export default function configureStore(persistedState) {
     persistedState,
     compose(
       applyMiddleware(thunkMiddleware),
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
+      window.__REDUX_DEVTOOLS_EXTENSION__ && //comment this to use with react native debugger
         window.__REDUX_DEVTOOLS_EXTENSION__()
     )
   );
